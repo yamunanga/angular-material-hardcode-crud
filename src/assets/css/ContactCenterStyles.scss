@@ -1,0 +1,156 @@
+.w-100{
+    width: 100%;
+}
+
+
+// Card
+.row{
+    margin: 0px;
+}
+.card{
+    margin: 10px;
+    border-style: none !important;
+}
+
+.card-header{
+    color: white;
+    background: linear-gradient(to right, #269dcc 0%, #b9d5da 100%);
+    height: 50px !important;
+    border-bottom: 0px;
+    font-size: 20px;
+    font-weight:400;
+}
+  
+.card-title{   
+    bottom: 0px;
+    margin: 0px;
+}
+  .card-body{
+    background-color: rgba(247, 249, 253, 0.589);
+
+    border-color:#c2c8c9  !important;
+    border-width: 2px !important;
+    border-top-style: none !important;
+    border-left-style: solid !important;
+    border-right-style: solid !important;
+    border-bottom-style: solid !important;
+  }
+  
+  .card{
+    background-color: transparent;
+  }
+
+//Tables
+.tableBody{
+    padding: 20px;
+}
+
+.table-Row{
+    background-color: #c3dff7 !important;
+    color: black;
+  }
+  
+  .table-Col-Header{
+    color: rgb(7, 0, 0) !important;
+    font-size: 15px !important;
+    font-weight:500 !important;
+    padding-left:5px !important;
+    padding-right:5px !important;
+  }
+  
+  .table-Col-Cell{
+    padding-left:5px !important;
+    padding-right:5px !important;
+  }
+  
+  tr.mat-header-row{
+    height: 35px !important;
+  }
+  
+  .mat-column-Actions{
+    width: 100px !important;
+  }
+  
+  .tbl-btn-group{
+    height: 35px !important;
+  }
+
+  .mat-row:hover {
+      cursor: pointer;
+    background-color: rgb(169, 197, 214);
+  }
+
+  .highlight{
+    background-color: #79c0a5 !important; /* green */
+  }
+
+  //Form
+  .header-title{
+    background: linear-gradient(to right, #269dcc 0%, #b9d5da 100%);
+    width: 100% !important;
+    height: 50px !important;
+    color: white;
+    display: inline-block;
+  }
+
+  .rightForm{
+      width: 500px;
+      height: 600px;
+      transition-duration: .5s !important; 
+      position: fixed; 
+      z-index: 1000; 
+      bottom: 25px; 
+      right: -500px;
+      background-color: rgb(248, 248, 248);
+
+      padding-top: 20px;
+
+      
+    border-color:#05424d  !important;
+    border-width: 2px !important;
+    border-top-style: solid !important;
+    border-left-style: solid !important;
+    border-right-style: solid !important;
+    border-bottom-style: solid !important;
+    border-radius: 2%;
+  }
+
+  .rightFormMain{
+      height: 100%;
+      width: 100%;
+  }
+
+  .btn-holder {
+    position:absolute;                  
+    bottom:25px;                          
+    right:25px; 
+  }
+
+  .form-card-body{
+      max-height: 450px;
+      max-width: 450px;
+  }
+
+  .moveButtonDiv{
+    margin-top: -10px; 
+    margin-left: -10px; 
+    font-size: 20px !important;
+  }
+
+  .moveIcon{
+    font-size: 25px !important;
+    color: white;
+    height: 50px;
+      background-color: rgb(22, 48, 97);
+      padding : 10px;
+      border-top-right-radius: 20%;
+      border-bottom-right-radius: 20%;
+      border-color:#05424d  !important;
+      border-top-style: solid;
+      border-right-style: solid;
+      border-bottom-style: solid;
+      border-left-style: none;
+      border-width: 2px !important;
+
+      cursor: pointer;
+  }

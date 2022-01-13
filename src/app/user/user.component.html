@@ -1,0 +1,167 @@
+<!-- <button mat-stroked-button (click)="ErrorMsg()" aria-label="Show an example snack-bar">
+  error
+</button>
+<button mat-stroked-button (click)="SuccessMsg()" aria-label="Show an example snack-bar">
+  success
+</button>
+<button mat-stroked-button (click)="InfoMsg()" aria-label="Show an example snack-bar">
+  info
+</button>
+<button mat-stroked-button (click)="WarningMsg()" aria-label="Show an example snack-bar">
+  warning
+</button>
+<button mat-stroked-button (click)="Msg()" aria-label="Show an example snack-bar">
+  msg
+</button> -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-primary">
+      <div class="card-header">
+        <div class="card-title">Existing Users</div>
+      </div>
+      <div class="card-body">
+        <div class="tableBody mat-elevation-z8">
+          <div class="row">
+            <div class="col-lg-5">
+              <mat-form-field class="w-100">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2">
+              <div class="btn-group w-100 tbl-btn-group">
+                <button class="btn btn-success" style="width:25%" (click)="getForm()">
+                  <i class="fa fa-plus"></i>
+                </button>
+                <button class="btn btn-info" style="width:25%" [disabled]="editAndDelteBtndisble" (click)="getFormToEdit()">
+                  <i class="fa fa-clipboard"></i>
+                </button>
+                <button class="btn btn-danger" style="width:25%" [disabled]="editAndDelteBtndisble" (click)="delete()">
+                  <i class="fa fa-eraser"></i>
+                </button>
+                <button class="btn btn-warning" style="width:25%" [disabled]="editAndDelteBtndisble"
+                  (click)="clearSelection()">
+                  <i class="fa fa-chain-broken"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table mat-table [dataSource]="dataSource" matSort class="w-100">
+
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-Col-Header"> # </th>
+                  <td mat-cell *matCellDef="let row ;let i = index" class="table-Col-Cell"> {{row.userID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="username">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-Col-Header"> Username </th>
+                  <td mat-cell *matCellDef="let row" class="table-Col-Cell"> {{row.username}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="firstName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-Col-Header"> First Name </th>
+                  <td mat-cell *matCellDef="let row" class="table-Col-Cell"> {{row.firstName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="address1">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-Col-Header"> Address 1 </th>
+                  <td mat-cell *matCellDef="let row" class="table-Col-Cell"> {{row.address1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="address2">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-Col-Header"> Address 2 </th>
+                  <td mat-cell *matCellDef="let row" class="table-Col-Cell"> {{row.address2}} </td>
+                </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-Row"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                  [ngClass]="{'highlight': selecteduserID == row.userID}" (click)="highlight(row)"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="rightForm">
+  <div class="header-title">
+      <span class="moveButton"><i class="icon fa fa-toggle-right moveIcon" (click)="MoveOutForm()"></i></span>
+      <span>&nbsp;&nbsp;Fill This</span>
+  </div>
+  <form [formGroup]="UserForm" (submit)="onSubmit()" class="rightFormMain">
+    <perfect-scrollbar [config]="config" style="max-height: 500px;">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="row d-none">
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-label>UserID</mat-label>
+                <input matInput formControlName="userID" type="number" [required]="UserForm.controls.userID.invalid">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="w-100">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" type="text" [required]="UserForm.controls.username.invalid">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="w-100">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" type="text"
+                  [required]="UserForm.controls.firstName.invalid">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="w-100">
+                <mat-label>Aaddress 01</mat-label>
+                <input matInput formControlName="address1" type="text" [required]="UserForm.controls.address1.invalid">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="w-100">
+                <mat-label>Address 02</mat-label>
+                <input matInput formControlName="address2" type="text" [required]="UserForm.controls.address2.invalid">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </perfect-scrollbar>
+    <div class="btn-holder">
+      <div class="btn-toolbar pull-right" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2 ContactCenterbtn add" role="group">
+          <button class="btn" [disabled]="UserForm.invalid" type="submit">
+            &nbsp;<i class="fa fa-plus-circle"></i> {{OperationBtnText}}
+          </button>
+        </div>
+        <div class="btn-group ContactCenterbtn clear" role="group" style="padding-right: 0px;">
+          <button type="button" class="btn">
+            &nbsp;<i class="fa fa-eraser" (click)="clearForm()"></i>  Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
