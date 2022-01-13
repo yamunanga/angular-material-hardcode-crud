@@ -7,16 +7,18 @@ import { YamunangaEmployeeService } from '../Services/MasterService/yamunanga-em
 import { SelectionModel } from '@angular/cdk/collections';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AlertService } from '../Services/Alert.service';
-
 @Component({
   selector: 'app-yamunanga-employee',
   templateUrl: './yamunanga-employee.component.html',
   styleUrls: ['./yamunanga-employee.component.scss']
 })
 export class YamunangaEmployeeComponent implements OnInit {
+  //dateString:string;
+  date:Date;
+  cityPosition:number;//to send city position to select option
   empList:YamunangaEmployee[]=[]
   selection = new SelectionModel<YamunangaEmployee>(true, []);
-  lenList;//to get length of empList
+  lenList:number;//to get length of empList
   cols=1;//for div management
   displayedColumns: string[] = ['index','firstName','lastName','address','city','birthday','age','select'];
   dataSource;//for pagination
@@ -33,6 +35,8 @@ export class YamunangaEmployeeComponent implements OnInit {
    }
   
   ngOnInit() {
+    this.date=new Date();
+    this.isOnEdit=false;
     this.allEmp();
     this.empForm =new FormGroup({
       dateOfBirth :new FormControl('', [Validators.required]),
@@ -51,11 +55,12 @@ export class YamunangaEmployeeComponent implements OnInit {
 
  //sample cities
   city: any[] = [
-    {position: 1, name: 'Galle'},
-    {position: 2, name: 'Colombo'},
+    {position: 1, name: 'galle'},
+    {position: 2, name: 'colombo'},
     {position: 3, name: 'kandy'},
-    {position: 4, name: 'Hambantota'},
-    {position: 5, name: 'jafna'}
+    {position: 4, name: 'hambantota'},
+    {position: 5, name: 'jafna'},
+    
   ];
 
 //to get all employee
@@ -154,7 +159,7 @@ export class YamunangaEmployeeComponent implements OnInit {
 onSubmit(){
   if(this.isOnEdit != true){
     if(this.empForm.value.firstName !='' && this.empForm.value.firstName !=null && this.empForm.value.lastName !='' && this.empForm.value.lastName !=null && this.empForm.value.address !='' && this.empForm.value.address !=null && this.empForm.value.cityN !='' && this.empForm.value.cityN !=null && this.empForm.value.dateOfBirth !='' && this.empForm.value.dateOfBirth !=null){
-    this.addEmp(this.empForm.value.firstName,this.empForm.value.lastName,this.empForm.value.address,this.empForm.value. cityN,this.empForm.value.dateOfBirth,0);
+    this.addEmp(this.empForm.value.firstName,this.empForm.value.lastName,this.empForm.value.address,this.empForm.value.cityN,this.empForm.value.dateOfBirth,0);
     this.clearForm();
     this.alertService.showSuccess('Successfully Aded !');
   }else{
@@ -169,6 +174,7 @@ onSubmit(){
     this.empList[index].age=this.empService.getAge(this.empForm.value.dateOfBirth)
     this.alertService.showSuccess('Successfully uppdated');
     this.clearForm();
+    this.chageCols1();
   }
 }
 
@@ -178,6 +184,8 @@ forEdit(data){
   this.empService.now();
   this.isOnEdit=true;
   this.changeCols2();
+  //this.sendPosition(data[0].city);
+  this.changeDate(data[0].birthday);
   this.empForm.patchValue({
     firstName:data[0].firstName,
     lastName:data[0].lastName,
@@ -186,11 +194,30 @@ forEdit(data){
     dateOfBirth:data[0].birthday
   })
 
-
 }
+
+//to send city position to select option
+/*sendPosition(name){
+  var len=this.city.length;
+  for(let i = 0; i < this.city.length; i++){
+    if(this.city[i].name== name){
+      this.cityPosition=this.city[i].position
+      break;
+    }
+  }
+}*/
+
+//Tue Jan 04 2022 00:00:00 GMT+0530 (India Standard Time)
+
  //to reset form
  clearForm(){
   this.empForm.reset();
+  this.date=new Date();
  }
+//change date
+
+changeDate(cDate){
+  this.date= new Date(cDate);
+}
 
 }

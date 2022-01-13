@@ -14,7 +14,7 @@ export class YamunangaEmployeeService {
 //for convert date coming from db
 getDate(date){
   var stillUtc = moment.utc(date).toDate();
-  var currentTime= moment(stillUtc).local().format('MMMM Do YYYY');
+  var currentTime= moment(stillUtc).local().format("YYYY-MM-DD");
   return currentTime;
 }
 
@@ -37,12 +37,6 @@ getAge(dateString) {
   }
   return age;
 }
-
-
-
-
-
-
 
 
 }

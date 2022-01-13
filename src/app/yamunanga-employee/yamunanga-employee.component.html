@@ -103,7 +103,10 @@
     <div class="centerSdiv">
   <mat-card>
     <div class="center">
-      <mat-card-title><h4>Employee Add </h4></mat-card-title>
+      <mat-card-title>
+        <h4 *ngIf="this.isOnEdit == false">Employee Add </h4> 
+        <h4 *ngIf="this.isOnEdit == true">Employee Update </h4>
+      </mat-card-title>
     </div>
 <!--Form Starteds-->
 <br>
@@ -144,7 +147,7 @@
   <br>
   <mat-form-field   [style.width.px]=275 > 
     <mat-label>Date of Birth</mat-label>
-    <input matInput [max]="today" [matDatepicker]="dob" formControlName="dateOfBirth" [required]="empForm.controls.dateOfBirth.invalid">
+    <input matInput [value]="date" [max]="today" [matDatepicker]="dob" formControlName="dateOfBirth" [required]="empForm.controls.dateOfBirth.invalid">
     <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
     <mat-datepicker #dob ></mat-datepicker>
     <mat-error *ngIf="myError('dateOfBirth', 'required')">Dob is required</mat-error>
