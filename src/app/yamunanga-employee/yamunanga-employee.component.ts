@@ -39,6 +39,7 @@ export class YamunangaEmployeeComponent implements OnInit {
     this.isOnEdit=false;
     this.allEmp();
     this.empForm =new FormGroup({
+      id: new FormControl(),
       dateOfBirth :new FormControl('', [Validators.required]),
       cityN:new FormControl('', [Validators.required]),
       firstName:new FormControl('', [Validators.required, Validators.maxLength(8)]),
@@ -83,6 +84,10 @@ export class YamunangaEmployeeComponent implements OnInit {
   addEmp(firstName: string,lastName:string, address: string,city:string,birthday:String,age:number) {
 
     var emp:YamunangaEmployee=new YamunangaEmployee();
+    
+    var lastEmployee =this.empList[this.empList.length-1];
+    
+    emp.id =(lastEmployee)? lastEmployee.id + 1: 1;
     emp.firstName=firstName.toLowerCase() ;
     emp.lastName=lastName.toLowerCase();
     emp.address=address.toLowerCase() ;
@@ -94,6 +99,7 @@ export class YamunangaEmployeeComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.empList);
     this.dataSource.paginator = this.paginator;
     this.lenList=this.empList.length;
+    console.log(this.empList)
   }
 
 //to update paginator and data source
@@ -166,7 +172,8 @@ onSubmit(){
     this.alertService.showError('Empty Fields Found !');
   }
 }else{
-    let index = this.empList.findIndex(emp => emp.firstName === this.empForm.value.firstName);
+    let index = this.empList.findIndex(emp => emp.id === this.empForm.value.id);
+    this.empList[index].firstName = this.empForm.value.firstName.toLowerCase();
     this.empList[index].lastName = this.empForm.value.lastName.toLowerCase();
     this.empList[index].address = this.empForm.value.address.toLowerCase();
     this.empList[index].city = this.empForm.value.cityN.toLowerCase();

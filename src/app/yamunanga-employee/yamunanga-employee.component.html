@@ -29,7 +29,7 @@
           The actual rendered columns are set as a property on the row definition" -->
   <ng-container matColumnDef="index" >
       <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
-      <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+      <td mat-cell *matCellDef="let element; let i = index"> {{element.id}} </td>
     </ng-container>
   
     <ng-container matColumnDef="firstName">
@@ -113,7 +113,7 @@
 <div class="formDiv">
 <form [formGroup]="empForm" (submit)="onSubmit()">
  
-  <mat-form-field class="example-full-width"   [style.width.px]=275 appearance="fill" *ngIf="this.isOnEdit !=true;">
+  <mat-form-field class="example-full-width"   [style.width.px]=275 appearance="fill" >
     <mat-label>FirstName</mat-label>
     <input matInput  placeholder="Input FirstName" formControlName="firstName"  [required]="empForm.controls.firstName.invalid">
     <mat-error *ngIf="myError('firstName', 'required')">FirstName is required</mat-error>

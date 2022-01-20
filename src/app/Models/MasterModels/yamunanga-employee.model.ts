@@ -1,4 +1,5 @@
 export class YamunangaEmployee {
+    id:number;
     firstName :string;
     lastName:string;
     address:string;
